@@ -52,7 +52,7 @@ class Helper
         return $travels;
     }
 
-    public function getCompaniesTree($companies = [], $travelsCostByCompany = [], $parent = null, $used = []){
+    public function getCompaniesTree($companies = [], $parent = null, $used = []){
 
         $branch = [];
         $parentId = !empty($parent->id) ? $parent->id : 0;
@@ -63,7 +63,7 @@ class Helper
                 if(!empty($companies[$parentId])){
                     $company->setParent($companies[$parentId]);
                 }
-                $children = $this->getCompaniesTree($companies, $travelsCostByCompany, $company,$used);
+                $children = $this->getCompaniesTree($companies, $company,$used);
                 if($children) {
                     $company->children = $children;
                 }          
@@ -179,7 +179,7 @@ class TestScript
         $trabelsCostByCompany = $helper->getTravelsCostByCompany($travels);
         $companies = $helper->getCompaniesFromEndpoint();
 
-        $companiesTree = $helper->cleanTree($helper->getCompaniesTree($companies,$trabelsCostByCompany));
+        $companiesTree = $helper->cleanTree($helper->getCompaniesTree($companies));
 
         $helper->getCosts($companiesTree,$trabelsCostByCompany);
 
