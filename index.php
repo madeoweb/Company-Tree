@@ -186,7 +186,7 @@ class TestScript
         $output = [];
         $helper->getOutputArray($companiesTree,$output);
 
-        echo "<pre>" . print_r($output,true) . "</pre>";
+        echo "<pre>" . json_encode($output) . "</pre>";
 
         echo 'Total time: '.  (microtime(true) - $start);
     }
